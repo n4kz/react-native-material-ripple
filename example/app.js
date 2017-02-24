@@ -1,7 +1,3 @@
-/**
- * @flow
- */
-
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, ScrollView, View } from 'react-native';
 import Ripple from 'react-native-material-ripple';
