@@ -8,6 +8,7 @@ export default class Ripple extends Component {
     rippleOpacity: 0.20,
     rippleDuration: 400,
     rippleSize: 0,
+    rippleContainerBorderRadius: 0,
   };
 
   static propTypes = {
@@ -15,6 +16,7 @@ export default class Ripple extends Component {
     rippleOpacity: PropTypes.number,
     rippleDuration: PropTypes.number,
     rippleSize: PropTypes.number,
+    rippleContainerBorderRadius: PropTypes.number,
   };
 
   constructor(props) {
@@ -104,7 +106,7 @@ export default class Ripple extends Component {
   }
 
   render() {
-    let { children, rippleColor, ...props } = this.props;
+    let { children, rippleColor, rippleContainerBorderRadius, ...props } = this.props;
     let { ripples } = this.state;
 
     ripples = ripples
@@ -129,7 +131,7 @@ export default class Ripple extends Component {
       <Animated.View onLayout={this.onLayout.bind(this)} {...props} {...this.panResponder.panHandlers}>
         {children}
 
-        <View style={styles.container}>
+        <View style={[styles.container, { borderRadius: rippleContainerBorderRadius }]}>
           {ripples}
         </View>
       </Animated.View>

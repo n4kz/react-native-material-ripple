@@ -74,6 +74,9 @@ let styles = {
   }
 };
 
+/* XXX: Ripple border radius should match container border radius */
+Ripple.defaultProps.rippleContainerBorderRadius = styles.container.borderRadius;
+
 export default function init() {
   class Example extends Component {
     render() {

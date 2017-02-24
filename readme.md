@@ -30,10 +30,11 @@ export default class Example extends Component {
 
 ## Properties
 
-* `rippleColor`    - Ripple color (default: black)
-* `rippleOpacity`  - Ripple opacity (default: 0.2)
-* `rippleDuration` - Ripple duration in ms (default: 400)
-* `rippleSize`     - Ripple size restriction (default: 0)
+* `rippleColor`                 - Ripple color (default: black)
+* `rippleOpacity`               - Ripple opacity (default: 0.2)
+* `rippleDuration`              - Ripple duration in ms (default: 400)
+* `rippleSize`                  - Ripple size restriction (default: 0)
+* `rippleContainerBorderRadius` - Border radius for ripple container (default: 0)
 
 ## Example
 
