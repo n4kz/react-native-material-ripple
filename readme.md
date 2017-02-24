@@ -2,6 +2,8 @@
 
 Base component for touchable elements
 
+![Example](https://cloud.githubusercontent.com/assets/2055622/23309410/a363975a-fabf-11e6-8cd8-b9c5cca76b63.gif)
+
 ## Installation
 
 ```bash
