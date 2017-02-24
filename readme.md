@@ -18,12 +18,28 @@ import Ripple from 'react-native-material-ripple';
 export default class Example extends Component {
   render() {
     return (
-      <Ripple>
+      <Ripple onPressOut={ () => null }>
         <Text>touch me</Text>
       </Ripple>
     );
   }
 }
+```
+
+## Properties
+
+* `rippleColor`    - Ripple color (default: black)
+* `rippleOpacity`  - Ripple opacity (default: 0.2)
+* `rippleDuration` - Ripple duration in ms (default: 400)
+* `rippleSize`     - Ripple size restriction (default: 0)
+
+## Example
+
+```bash
+git clone https://github.com/n4kz/react-native-material-ripple.git
+cd react-native-material-ripple
+npm install
+react-native run-ios # or run-android
 ```
 
 ## Copyright and License
