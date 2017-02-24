@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import { View, Animated, Easing, PanResponder } from 'react-native'
-import styles from './styles.js';
+import { styles, radius } from './styles.js';
 
 export default class Ripple extends Component {
   static defaultProps = {
@@ -69,7 +69,6 @@ export default class Ripple extends Component {
     let { rippleDuration, rippleOpacity } = this.props;
     let { ripples, size } = this.state;
 
-    let radius = styles.ripple.borderRadius;
     let unique = this.unique++;
 
     let ripple = {
@@ -107,8 +106,6 @@ export default class Ripple extends Component {
   render() {
     let { children, rippleColor, ...props } = this.props;
     let { ripples } = this.state;
-
-    let radius = styles.ripple.borderRadius;
 
     ripples = ripples
       .map(($_) => {

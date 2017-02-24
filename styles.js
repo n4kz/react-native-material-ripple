@@ -1,19 +1,21 @@
-export default styles = {
+import { StyleSheet } from 'react-native';
+
+const radius = 10;
+const styles = StyleSheet.create({
   container: {
+    ...StyleSheet.absoluteFillObject,
+
     backgroundColor: 'transparent',
     overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0,
   },
 
   ripple: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: radius * 2,
+    height: radius * 2,
+    borderRadius: radius,
     overflow: 'hidden',
     position: 'absolute',
   }
-};
+});
+
+export { styles, radius };
