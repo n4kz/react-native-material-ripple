@@ -23,37 +23,70 @@ export default class Ripple extends Component {
     super(props);
 
     this.unique = 0;
+    this.focused = false;
 
     this.state = {
       size: 0,
+      width: 0,
+      height: 0,
       ripples: [],
     };
   }
 
   componentWillMount() {
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => {
-        return true;
-      },
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderTerminationRequest: () => false,
 
       onPanResponderGrant: (event, gestureState) => {
-        let { onPressIn } = this.props;
+        this.setFocused(true);
+      },
 
-        if (typeof onPressIn === 'function') {
-          onPressIn();
-        }
+      onPanResponderMove: (event, gestureState) => {
+        let { locationX, locationY } = event.nativeEvent;
+        let { width, height } = this.state;
+
+        let focused =
+          (locationX >= 0 && locationX <= width) &&
+          (locationY >= 0 && locationY <= height);
+
+        this.setFocused(focused);
       },
 
       onPanResponderRelease: (event, gestureState) => {
-        let { onPressOut } = this.props;
-
-        if (typeof onPressOut === 'function') {
-          onPressOut();
+        if (this.focused) {
+          this.startRipple(event);
         }
 
-        this.startRipple(event);
-      }
+        this.setFocused(false);
+      },
+
+      onPanResponderTerminate: (event, gestureState) => {
+        this.setFocused(false);
+      },
     });
+  }
+
+  setFocused(focused) {
+    if (focused ^ this.focused) {
+      this.focused = focused;
+      this.onFocusChage();
+    }
+  }
+
+  onFocusChage() {
+    let { onPressOut, onPressIn } = this.props;
+
+    if (this.focused) {
+      if (typeof onPressIn === 'function') {
+        onPressIn();
+      }
+    } else {
+      if (typeof onPressOut === 'function') {
+        onPressOut();
+      }
+    }
   }
 
   onLayout(event) {
@@ -63,7 +96,7 @@ export default class Ripple extends Component {
     let size = rippleSize > 0?
       rippleSize : Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
 
-    this.setState({ size });
+    this.setState({ size, width, height });
   }
 
   startRipple(event) {
