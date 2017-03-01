@@ -55,8 +55,14 @@ export default class Ripple extends Component {
       },
 
       onPanResponderRelease: (event, gestureState) => {
+        let { onPress } = this.props;
+
         if (this.focused) {
           this.startRipple(event);
+
+          if (typeof onPress === 'function') {
+            onPress();
+          }
         }
 
         this.setFocused(false);
