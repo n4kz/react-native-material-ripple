@@ -20,7 +20,7 @@ import Ripple from 'react-native-material-ripple';
 export default class Example extends Component {
   render() {
     return (
-      <Ripple onPressOut={ () => null }>
+      <Ripple onPress={ () => null }>
         <Text>touch me</Text>
       </Ripple>
     );
@@ -35,6 +35,12 @@ export default class Example extends Component {
 * `rippleDuration`              - Ripple duration in ms (default: 400)
 * `rippleSize`                  - Ripple size restriction (default: 0)
 * `rippleContainerBorderRadius` - Border radius for ripple container (default: 0)
+
+## Callbacks
+
+* `onPressIn`  - Called when component receives touch
+* `onPressOut` - Called when component looses touch
+* `onPress`    - Called on touch up in component bounds
 
 ## Example
 
