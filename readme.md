@@ -46,7 +46,7 @@ export default class Example extends Component {
 
 ```bash
 git clone https://github.com/n4kz/react-native-material-ripple.git
-cd react-native-material-ripple
+cd react-native-material-ripple/example
 npm install
 react-native run-ios # or run-android
 ```
