@@ -150,13 +150,15 @@ export default class Ripple extends Component {
     let { children, rippleColor, rippleContainerBorderRadius, ...props } = this.props;
     let { ripples } = this.state;
 
-    ripples = ripples
-      .map(($_) => {
-        let { scale, opacity, unique } = $_;
+    let containerStyle = {
+      borderRadius: rippleContainerBorderRadius,
+    };
 
-        let style = {
-          top: $_.locationY - radius,
-          left: $_.locationX - radius,
+    ripples = ripples
+      .map(({ scale, opacity, locationX, locationY, unique }) => {
+        let rippleStyle = {
+          top: locationY - radius,
+          left: locationX - radius,
           backgroundColor: rippleColor,
 
           transform: [{ scale }],
@@ -164,7 +166,7 @@ export default class Ripple extends Component {
         };
 
         return (
-          <Animated.View style={[ styles.ripple, style ]} key={unique} pointerEvents='none' />
+          <Animated.View style={[ styles.ripple, rippleStyle ]} key={unique} pointerEvents='none' />
         );
       });
 
@@ -172,7 +174,7 @@ export default class Ripple extends Component {
       <Animated.View onLayout={this.onLayout.bind(this)} {...props} {...this.panResponder.panHandlers}>
         {children}
 
-        <View style={[styles.container, { borderRadius: rippleContainerBorderRadius }]} pointerEvents='none'>
+        <View style={[ styles.container, containerStyle ]} pointerEvents='none'>
           {ripples}
         </View>
       </Animated.View>
