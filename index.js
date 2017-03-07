@@ -172,7 +172,7 @@ export default class Ripple extends Component {
       <Animated.View onLayout={this.onLayout.bind(this)} {...props} {...this.panResponder.panHandlers}>
         {children}
 
-        <View style={[styles.container, { borderRadius: rippleContainerBorderRadius }]}>
+        <View style={[styles.container, { borderRadius: rippleContainerBorderRadius }]} pointerEvents='none'>
           {ripples}
         </View>
       </Animated.View>
