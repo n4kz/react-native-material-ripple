@@ -18,7 +18,7 @@ export default class Ripple extends Component {
     rippleDuration: PropTypes.number,
     rippleSize: PropTypes.number,
     rippleContainerBorderRadius: PropTypes.number,
-    disabled: PropTypes.boolean,
+    disabled: PropTypes.bool,
   };
 
   constructor(props) {
