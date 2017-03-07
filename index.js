@@ -24,6 +24,8 @@ export default class Ripple extends Component {
   constructor(props) {
     super(props);
 
+    this.onLayout = this.onLayout.bind(this);
+
     this.unique = 0;
     this.focused = false;
 
@@ -171,7 +173,7 @@ export default class Ripple extends Component {
       });
 
     return (
-      <Animated.View onLayout={this.onLayout.bind(this)} {...props} {...this.panResponder.panHandlers}>
+      <Animated.View onLayout={this.onLayout} {...props} {...this.panResponder.panHandlers}>
         {children}
 
         <View style={[ styles.container, containerStyle ]} pointerEvents='none'>
