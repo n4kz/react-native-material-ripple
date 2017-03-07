@@ -110,7 +110,7 @@ export default function init() {
             <Text style={styles.text}>rippleColor=#76FF03{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=2400</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.z]}>
+          <Ripple disabled style={[styles.container, styles.z]}>
             <Text style={styles.footnote}>Tap on any card to see surface reaction</Text>
           </Ripple>
         </ScrollView>
