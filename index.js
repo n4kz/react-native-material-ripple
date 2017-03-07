@@ -9,6 +9,7 @@ export default class Ripple extends Component {
     rippleDuration: 400,
     rippleSize: 0,
     rippleContainerBorderRadius: 0,
+    disabled: false,
   };
 
   static propTypes = {
@@ -17,6 +18,7 @@ export default class Ripple extends Component {
     rippleDuration: PropTypes.number,
     rippleSize: PropTypes.number,
     rippleContainerBorderRadius: PropTypes.number,
+    disabled: PropTypes.boolean,
   };
 
   constructor(props) {
@@ -35,8 +37,8 @@ export default class Ripple extends Component {
 
   componentWillMount() {
     this.panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponder: () => !this.props.disabled,
+      onMoveShouldSetPanResponder: () => !this.props.disabled,
       onPanResponderTerminationRequest: () => false,
 
       onPanResponderGrant: (event, gestureState) => {
@@ -55,9 +57,9 @@ export default class Ripple extends Component {
       },
 
       onPanResponderRelease: (event, gestureState) => {
-        let { onPress } = this.props;
+        let { onPress, disabled } = this.props;
 
-        if (this.focused) {
+        if (this.focused && !disabled) {
           this.startRipple(event);
 
           if (typeof onPress === 'function') {
