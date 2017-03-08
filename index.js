@@ -104,7 +104,7 @@ export default class Ripple extends Component {
     let { width, height } = event.nativeEvent.layout;
 
     let size = rippleSize > 0?
-      rippleSize : Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+      rippleSize : 2 * Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
 
     this.setState({ size, width, height });
   }
