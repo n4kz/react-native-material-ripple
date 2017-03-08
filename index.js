@@ -5,7 +5,7 @@ import { styles, radius } from './styles.js';
 export default class Ripple extends Component {
   static defaultProps = {
     rippleColor: 'black',
-    rippleOpacity: 0.20,
+    rippleOpacity: 0.30,
     rippleDuration: 400,
     rippleSize: 0,
     rippleContainerBorderRadius: 0,
