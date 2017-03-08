@@ -80,15 +80,14 @@ export default class Ripple extends Component {
 
   setFocused(focused) {
     if (focused ^ this.focused) {
-      this.focused = focused;
-      this.onFocusChage();
+      this.onFocusChange(this.focused = focused);
     }
   }
 
-  onFocusChage() {
+  onFocusChange(focused) {
     let { onPressOut, onPressIn } = this.props;
 
-    if (this.focused) {
+    if (focused) {
       if (typeof onPressIn === 'function') {
         onPressIn();
       }
