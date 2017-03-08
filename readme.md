@@ -35,7 +35,8 @@ export default class Example extends Component {
 * `rippleDuration`              - Ripple duration in ms (default: 400)
 * `rippleSize`                  - Ripple size restriction (default: 0)
 * `rippleContainerBorderRadius` - Ripple container border radius (default: 0)
-* `disabled`                    - Ripple should ignore gestures (default: false)
+* `rippleCentered`              - Ripple always starts from center (default: false)
+* `disabled`                    - Ripple should ignore touches (default: false)
 * `onPressIn`                   - Touch moved in or started callback
 * `onPressOut`                  - Touch moved out or terminated callback
 * `onPress`                     - Touch up inside bounds callback

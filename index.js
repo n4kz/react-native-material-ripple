@@ -9,6 +9,7 @@ export default class Ripple extends Component {
     rippleDuration: 400,
     rippleSize: 0,
     rippleContainerBorderRadius: 0,
+    rippleCentered: false,
     disabled: false,
   };
 
@@ -18,6 +19,7 @@ export default class Ripple extends Component {
     rippleDuration: PropTypes.number,
     rippleSize: PropTypes.number,
     rippleContainerBorderRadius: PropTypes.number,
+    rippleCentered: PropTypes.bool,
     disabled: PropTypes.bool,
   };
 
@@ -108,9 +110,13 @@ export default class Ripple extends Component {
   }
 
   startRipple(event) {
-    let { locationX, locationY } = event.nativeEvent;
-    let { rippleDuration, rippleOpacity } = this.props;
-    let { ripples, size } = this.state;
+    let { rippleDuration, rippleOpacity, rippleCentered } = this.props;
+    let { ripples, size, width, height } = this.state;
+
+    let { locationX, locationY } = rippleCentered? {
+      locationX: 0.5 * width,
+      locationY: 0.5 * height,
+    } : event.nativeEvent;
 
     let unique = this.unique++;
 
