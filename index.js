@@ -41,7 +41,6 @@ export default class Ripple extends Component {
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => !this.props.disabled,
       onMoveShouldSetPanResponder: () => !this.props.disabled,
-      onPanResponderTerminationRequest: () => false,
 
       onPanResponderGrant: (event, gestureState) => {
         this.setFocused(true);
@@ -175,7 +174,7 @@ export default class Ripple extends Component {
       <Animated.View onLayout={this.onLayout} {...props} {...this.panResponder.panHandlers}>
         {children}
 
-        <View style={[ styles.container, containerStyle ]} pointerEvents='none'>
+        <View style={[ styles.container, containerStyle ]}>
           {ripples}
         </View>
       </Animated.View>
