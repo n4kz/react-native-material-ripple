@@ -86,27 +86,27 @@ export default function init() {
             <Text style={styles.text}>default</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.b]} rippleSize={120} rippleDuration={600}>
-            <Text style={styles.text}>rippleSize=160{'\n'}rippleDuration=600</Text>
+          <Ripple style={[styles.container, styles.b]} rippleSize={176} rippleDuration={600}>
+            <Text style={styles.text}>rippleSize=176{'\n'}rippleDuration=600</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.c]} rippleSize={240} rippleDuration={800}>
-            <Text style={styles.text}>rippleSize=240{'\n'}rippleDuration=800</Text>
+          <Ripple style={[styles.container, styles.c]} rippleSize={244} rippleDuration={800}>
+            <Text style={styles.text}>rippleSize=244{'\n'}rippleDuration=800</Text>
           </Ripple>
 
           <Ripple style={[styles.container, styles.d]} rippleColor='white' rippleOpacity={0.54}>
             <Text style={styles.text}>rippleColor=#FFFFFF{'\n'}rippleOpacity=0.54</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.e]} rippleColor='white' rippleOpacity={0.30} rippleDuration={600}>
-            <Text style={styles.text}>rippleColor=#FFFFFF{'\n'}rippleOpacity=0.30{'\n'}rippleDuration=600</Text>
+          <Ripple style={[styles.container, styles.e]} rippleCentered rippleColor='white'>
+            <Text style={styles.text}>rippleColor=#FFFFFF{'\n'}rippleCentered=true</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.f]} rippleColor='#D500F9' rippleOpacity={0.54} rippleDuration={1200}>
-            <Text style={styles.text}>rippleColor=#D500F9{'\n'}rippleOpacity=0.54{'\n'}rippleDuration=1200</Text>
+          <Ripple style={[styles.container, styles.f]} rippleColor='#D500F9' rippleOpacity={0.87} rippleDuration={1200}>
+            <Text style={styles.text}>rippleColor=#D500F9{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=1200</Text>
           </Ripple>
 
-          <Ripple style={[styles.container, styles.g]} rippleColor='#76FF03' rippleOpacity={0.54} rippleDuration={2400}>
+          <Ripple style={[styles.container, styles.g]} rippleColor='#76FF03' rippleOpacity={0.87} rippleDuration={2400}>
             <Text style={styles.text}>rippleColor=#76FF03{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=2400</Text>
           </Ripple>
 
