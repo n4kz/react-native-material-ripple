@@ -32,7 +32,6 @@ export default class Ripple extends Component {
     this.focused = false;
 
     this.state = {
-      size: 0,
       width: 0,
       height: 0,
       ripples: [],
@@ -103,25 +102,32 @@ export default class Ripple extends Component {
     let { rippleSize } = this.props;
     let { width, height } = event.nativeEvent.layout;
 
-    let size = rippleSize > 0?
-      rippleSize : 2 * Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-
-    this.setState({ size, width, height });
+    this.setState({ width, height });
   }
 
   startRipple(event) {
     let { rippleDuration, rippleOpacity, rippleCentered } = this.props;
-    let { ripples, size, width, height } = this.state;
+    let { rippleSize, rippleContainerBorderRadius: r } = this.props;
+    let { ripples, width, height } = this.state;
 
-    let { locationX, locationY } = rippleCentered? {
-      locationX: 0.5 * width,
-      locationY: 0.5 * height,
-    } : event.nativeEvent;
+    let w2 = 0.5 * width;
+    let h2 = 0.5 * height;
+
+    let { locationX, locationY } = rippleCentered?
+      { locationX: w2, locationY: h2 }:
+      event.nativeEvent;
+
+    let offsetX = Math.abs(w2 - locationX);
+    let offsetY = Math.abs(h2 - locationY);
+
+    let R = rippleSize > 0?
+      0.5 * rippleSize:
+      Math.sqrt(Math.pow(w2 + offsetX, 2) + Math.pow(h2 + offsetY, 2));
 
     let unique = this.unique++;
 
     let ripple = {
-      scale: new Animated.Value(1 / (radius * 2)),
+      scale: new Animated.Value(0.5 / radius),
       opacity: new Animated.Value(rippleOpacity),
 
       unique, locationX, locationY,
@@ -132,7 +138,7 @@ export default class Ripple extends Component {
     Animated
       .parallel([
         Animated.timing(ripple.scale, {
-          toValue: size / (radius * 2),
+          toValue: R / radius,
           duration: rippleDuration,
           easing: Easing.out(Easing.ease),
         }),
