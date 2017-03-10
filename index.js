@@ -40,6 +40,8 @@ export default class Ripple extends Component {
 
   componentWillMount() {
     this.panResponder = PanResponder.create({
+      onShouldBlockNativeResponder: () => false,
+
       onStartShouldSetPanResponder: () => !this.props.disabled,
       onMoveShouldSetPanResponder: () => !this.props.disabled,
 
