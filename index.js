@@ -101,7 +101,6 @@ export default class Ripple extends Component {
   }
 
   onLayout(event) {
-    let { rippleSize } = this.props;
     let { width, height } = event.nativeEvent.layout;
 
     this.setState({ width, height });
