@@ -14,6 +14,8 @@ export default class Ripple extends Component {
   };
 
   static propTypes = {
+    ...Animated.View.propTypes,
+
     rippleColor: PropTypes.string,
     rippleOpacity: PropTypes.number,
     rippleDuration: PropTypes.number,
