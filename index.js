@@ -1,8 +1,8 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { View, Animated, Easing, PanResponder } from 'react-native'
 import { styles, radius } from './styles.js';
 
-export default class Ripple extends Component {
+export default class Ripple extends PureComponent {
   static defaultProps = {
     rippleColor: 'black',
     rippleOpacity: 0.30,
