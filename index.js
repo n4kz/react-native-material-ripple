@@ -109,7 +109,7 @@ export default class Ripple extends Component {
   startRipple(event) {
     let { rippleDuration, rippleOpacity, rippleCentered } = this.props;
     let { rippleSize, rippleContainerBorderRadius: r } = this.props;
-    let { ripples, width, height } = this.state;
+    let { width, height } = this.state;
 
     let w2 = 0.5 * width;
     let h2 = 0.5 * height;
@@ -125,16 +125,12 @@ export default class Ripple extends Component {
       0.5 * rippleSize:
       Math.sqrt(Math.pow(w2 + offsetX, 2) + Math.pow(h2 + offsetY, 2));
 
-    let unique = this.unique++;
-
     let ripple = {
       scale: new Animated.Value(0.5 / radius),
       opacity: new Animated.Value(rippleOpacity),
-
-      unique, locationX, locationY,
+      unique: this.unique++,
+      locationX, locationY,
     };
-
-    ripples.push(ripple);
 
     Animated
       .parallel([
@@ -151,12 +147,10 @@ export default class Ripple extends Component {
         }),
       ])
       .start(() => {
-        let ripples = this.state.ripples.slice(1);
-
-        this.setState({ ripples });
+        this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
       });
 
-    this.setState({ ripples });
+    this.setState(({ ripples }) => ({ ripples: ripples.concat(ripple) }));
   }
 
   render() {
