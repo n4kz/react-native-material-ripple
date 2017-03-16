@@ -53,11 +53,12 @@ export default class Ripple extends PureComponent {
 
       onPanResponderMove: (event, gestureState) => {
         let { locationX, locationY } = event.nativeEvent;
+        let { top, right, bottom, left } = this.props.hitSlop;
         let { width, height } = this.state;
 
         let focused =
-          (locationX >= 0 && locationX <= width) &&
-          (locationY >= 0 && locationY <= height);
+          (locationX >= -left && locationX <= width  + right) &&
+          (locationY >= -top  && locationY <= height + bottom);
 
         this.setFocused(focused);
       },
@@ -109,8 +110,7 @@ export default class Ripple extends PureComponent {
   }
 
   startRipple(event) {
-    let { rippleDuration, rippleOpacity, rippleCentered } = this.props;
-    let { rippleSize, rippleContainerBorderRadius: r } = this.props;
+    let { rippleDuration, rippleOpacity, rippleCentered, rippleSize } = this.props;
     let { width, height } = this.state;
 
     let w2 = 0.5 * width;
