@@ -4,7 +4,7 @@ import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
   static defaultProps = {
-    rippleColor: 'black',
+    rippleColor: 'rgb(0, 0, 0)',
     rippleOpacity: 0.30,
     rippleDuration: 400,
     rippleSize: 0,
