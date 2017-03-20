@@ -53,8 +53,10 @@ export default class Ripple extends PureComponent {
 
       onPanResponderMove: (event, gestureState) => {
         let { locationX, locationY } = event.nativeEvent;
-        let { top, right, bottom, left } = this.props.hitSlop;
         let { width, height } = this.state;
+
+        let { hitSlop = {} } = this.props;
+        let { top = 0, right = 0, bottom = 0, left = 0 } = hitSlop;
 
         let focused =
           (locationX >= -left && locationX <= width  + right) &&
