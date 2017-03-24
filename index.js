@@ -47,11 +47,11 @@ export default class Ripple extends PureComponent {
       onStartShouldSetPanResponder: () => !this.props.disabled,
       onMoveShouldSetPanResponder: () => !this.props.disabled,
 
-      onPanResponderGrant: (event, gestureState) => {
+      onPanResponderGrant: () => {
         this.setFocused(true);
       },
 
-      onPanResponderMove: (event, gestureState) => {
+      onPanResponderMove: (event) => {
         let { locationX, locationY } = event.nativeEvent;
         let { width, height } = this.state;
 
@@ -65,7 +65,7 @@ export default class Ripple extends PureComponent {
         this.setFocused(focused);
       },
 
-      onPanResponderRelease: (event, gestureState) => {
+      onPanResponderRelease: (event) => {
         let { onPress, disabled } = this.props;
 
         if (this.focused && !disabled) {
@@ -79,7 +79,7 @@ export default class Ripple extends PureComponent {
         this.setFocused(false);
       },
 
-      onPanResponderTerminate: (event, gestureState) => {
+      onPanResponderTerminate: () => {
         this.setFocused(false);
       },
     });
