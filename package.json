@@ -17,5 +17,16 @@
 	"peerDependencies": {
 		"react": "*",
 		"react-native": "*"
+	},
+
+	"devDependencies": {
+		"babel-eslint": "*",
+		"eslint": "*",
+		"eslint-plugin-import": "*",
+		"eslint-plugin-react": "*"
+	},
+
+	"scripts": {
+		"test": "node_modules/.bin/eslint index.js style.js"
 	}
 }
