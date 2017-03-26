@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: radius,
     overflow: 'hidden',
     position: 'absolute',
-  }
+  },
 });
 
 export { styles, radius };
