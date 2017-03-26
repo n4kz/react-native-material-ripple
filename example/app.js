@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, ScrollView, View } from 'react-native';
+import { AppRegistry, Text, ScrollView } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 
 let styles = {
@@ -25,7 +25,7 @@ let styles = {
     shadowOffset: {
       width: 0,
       height: 2,
-    }
+    },
   },
 
   a: {
@@ -64,14 +64,14 @@ let styles = {
   text: {
     fontSize: 15,
     fontWeight: '500',
-    color: 'rgba(255,255,255,.87)'
+    color: 'rgba(255,255,255,.87)',
   },
 
   footnote: {
     fontSize: 15,
     fontWeight: '400',
-    color: 'rgba(0,0,0,.54)'
-  }
+    color: 'rgba(0,0,0,.54)',
+  },
 };
 
 /* XXX: Ripple border radius should match container border radius */
