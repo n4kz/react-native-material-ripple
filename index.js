@@ -32,6 +32,7 @@ export default class Ripple extends PureComponent {
 
     this.unique = 0;
     this.focused = false;
+    this.touchStart = 0;
 
     this.state = {
       width: 0,
@@ -49,6 +50,7 @@ export default class Ripple extends PureComponent {
 
       onPanResponderGrant: () => {
         this.setFocused(true);
+        this.touchStart = new Date().getTime();
       },
 
       onPanResponderMove: (event) => {
@@ -66,12 +68,16 @@ export default class Ripple extends PureComponent {
       },
 
       onPanResponderRelease: (event) => {
-        let { onPress, disabled } = this.props;
+        let { onPress, disabled, onLongPress } = this.props;
 
         if (this.focused && !disabled) {
           this.startRipple(event);
 
-          if (typeof onPress === 'function') {
+          const touchEnd = new Date().getTime();
+          if((touchEnd >= (this.touchStart + 300)) && typeof onLongPress === 'function') {
+            this.touchStart = 0;
+            onLongPress();
+          } else if (typeof onPress === 'function') {
             onPress();
           }
         }
