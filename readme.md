@@ -50,6 +50,7 @@ disabled                    | Ripple should ignore touches           |  Boolean 
 onPressIn                   | Touch moved in or started callback     | Function | -
 onPressOut                  | Touch moved out or terminated callback | Function | -
 onPress                     | Touch up inside bounds callback        | Function | -
+onLongPress                 | Touch held for more than 300 miliseconds        | Function | -
 
 ## Example
 
