@@ -38,6 +38,7 @@ export default class Ripple extends PureComponent {
       width: 0,
       height: 0,
       ripples: [],
+      focused: false,
     };
   }
 
@@ -95,6 +96,7 @@ export default class Ripple extends PureComponent {
     if (focused ^ this.focused) {
       this.onFocusChange(this.focused = focused);
     }
+    this.setState({ focused });
   }
 
   onFocusChange(focused) {
@@ -165,10 +167,13 @@ export default class Ripple extends PureComponent {
 
   render() {
     let { children, rippleColor, rippleContainerBorderRadius, ...props } = this.props;
-    let { ripples } = this.state;
+    let { ripples, focused } = this.state;
+
+    const bgColor = focused ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0)';
 
     let containerStyle = {
       borderRadius: rippleContainerBorderRadius,
+      backgroundColor: bgColor,
     };
 
     ripples = ripples
@@ -188,7 +193,11 @@ export default class Ripple extends PureComponent {
       });
 
     return (
-      <Animated.View onLayout={this.onLayout} {...props} {...this.panResponder.panHandlers}>
+      <Animated.View
+        onLayout={this.onLayout}
+        {...props}
+        {...this.panResponder.panHandlers}
+      >
         {children}
 
         <View style={[ styles.container, containerStyle ]}>
