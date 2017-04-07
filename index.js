@@ -107,6 +107,11 @@ export default class Ripple extends PureComponent {
 
   onLayout(event) {
     let { width, height } = event.nativeEvent.layout;
+    let { onLayout } = this.props;
+
+    if ('function' === typeof onLayout) {
+      onLayout(event);
+    }
 
     this.setState({ width, height });
   }
@@ -182,7 +187,7 @@ export default class Ripple extends PureComponent {
       });
 
     return (
-      <Animated.View onLayout={this.onLayout} {...props} {...this.panResponder.panHandlers}>
+      <Animated.View {...props} {...this.panResponder.panHandlers} onLayout={this.onLayout}>
         {children}
 
         <View style={[ styles.container, containerStyle ]}>
