@@ -2,9 +2,8 @@
 [npm-url]: https://npmjs.com/package/react-native-material-ripple
 [license-badge]: https://img.shields.io/npm/l/react-native-material-ripple.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-ripple/master/license.txt
-[example-url]: https://cloud.githubusercontent.com/assets/2055622/23309410/a363975a-fabf-11e6-8cd8-b9c5cca76b63.gif
+[example-url]: https://cloud.githubusercontent.com/assets/2055622/24832328/459afaf0-1cb6-11e7-975d-accedb67a716.gif
 [touchable]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html
-[touchable-props]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 
 # react-native-material-ripple
 
@@ -63,7 +62,7 @@ onPressOut                  | Touch moved out or terminated callback | Function 
 onPress                     | Touch up inside bounds callback        | Function | -
 onLongPress                 | Touch delayed after onPressIn callback | Function | -
 
-Other [TouchableWithoutFeedback][touchable-props] properties will also work
+Other [TouchableWithoutFeedback][touchable] properties will also work
 
 ## Example
 
