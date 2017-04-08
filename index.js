@@ -1,9 +1,11 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { View, Animated, Easing, PanResponder } from 'react-native'
+import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
   static defaultProps = {
+    ...TouchableWithoutFeedback.defaultProps,
+
     rippleColor: 'rgb(0, 0, 0)',
     rippleOpacity: 0.30,
     rippleDuration: 400,
@@ -15,6 +17,7 @@ export default class Ripple extends PureComponent {
 
   static propTypes = {
     ...Animated.View.propTypes,
+    ...TouchableWithoutFeedback.propTypes,
 
     rippleColor: PropTypes.string,
     rippleOpacity: PropTypes.number,
@@ -29,9 +32,13 @@ export default class Ripple extends PureComponent {
     super(props);
 
     this.onLayout = this.onLayout.bind(this);
+    this.onPress = this.onPress.bind(this);
+    this.onPressIn = this.onPressIn.bind(this);
+    this.onPressOut = this.onPressOut.bind(this);
+    this.onLongPress = this.onLongPress.bind(this);
+    this.renderRipple = this.renderRipple.bind(this);
 
     this.unique = 0;
-    this.focused = false;
     this.mounted = false;
 
     this.state = {
@@ -41,77 +48,12 @@ export default class Ripple extends PureComponent {
     };
   }
 
-  componentWillMount() {
-    this.panResponder = PanResponder.create({
-      onShouldBlockNativeResponder: () => false,
-
-      onStartShouldSetPanResponder: () => !this.props.disabled,
-      onMoveShouldSetPanResponder: () => !this.props.disabled,
-
-      onPanResponderGrant: () => {
-        this.setFocused(true);
-      },
-
-      onPanResponderMove: (event) => {
-        let { locationX, locationY } = event.nativeEvent;
-        let { width, height } = this.state;
-
-        let { hitSlop = {} } = this.props;
-        let { top = 0, right = 0, bottom = 0, left = 0 } = hitSlop;
-
-        let focused =
-          (locationX >= -left && locationX <= width  + right) &&
-          (locationY >= -top  && locationY <= height + bottom);
-
-        this.setFocused(focused);
-      },
-
-      onPanResponderRelease: (event) => {
-        let { onPress, disabled } = this.props;
-
-        if (this.focused && !disabled) {
-          this.startRipple(event);
-
-          if (typeof onPress === 'function') {
-            onPress();
-          }
-        }
-
-        this.setFocused(false);
-      },
-
-      onPanResponderTerminate: () => {
-        this.setFocused(false);
-      },
-    });
-  }
-
   componentDidMount() {
     this.mounted = true;
   }
 
   componentWillUnmount() {
     this.mounted = false;
-  }
-
-  setFocused(focused) {
-    if (focused ^ this.focused) {
-      this.onFocusChange(this.focused = focused);
-    }
-  }
-
-  onFocusChange(focused) {
-    let { onPressOut, onPressIn } = this.props;
-
-    if (focused) {
-      if (typeof onPressIn === 'function') {
-        onPressIn();
-      }
-    } else {
-      if (typeof onPressOut === 'function') {
-        onPressOut();
-      }
-    }
   }
 
   onLayout(event) {
@@ -123,6 +65,42 @@ export default class Ripple extends PureComponent {
     }
 
     this.setState({ width, height });
+  }
+
+  onPress(event) {
+    let { onPress } = this.props;
+
+    if ('function' === typeof onPress) {
+      onPress(event);
+    }
+
+    this.startRipple(event);
+  }
+
+  onLongPress(event) {
+    let { onLongPress } = this.props;
+
+    if ('function' === typeof onLongPress) {
+      onLongPress(event);
+    }
+
+    this.startRipple(event);
+  }
+
+  onPressIn(event) {
+    let { onPressIn } = this.props;
+
+    if ('function' === typeof onPressIn) {
+      onPressIn(event);
+    }
+  }
+
+  onPressOut(event) {
+    let { onPressOut } = this.props;
+
+    if ('function' === typeof onPressOut) {
+      onPressOut(event);
+    }
   }
 
   startRipple(event) {
@@ -146,7 +124,9 @@ export default class Ripple extends PureComponent {
     let ripple = {
       unique: this.unique++,
       progress: new Animated.Value(0),
-      locationX, locationY, R,
+      locationX,
+      locationY,
+      R,
     };
 
     Animated
@@ -164,47 +144,76 @@ export default class Ripple extends PureComponent {
     this.setState(({ ripples }) => ({ ripples: ripples.concat(ripple) }));
   }
 
+  renderRipple({ unique, progress, locationX, locationY, R }) {
+    let { rippleColor, rippleOpacity } = this.props;
+
+    let rippleStyle = {
+      top: locationY - radius,
+      left: locationX - radius,
+      backgroundColor: rippleColor,
+
+      transform: [{
+        scale: progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0.5 / radius, R / radius],
+        }),
+      }],
+
+      opacity: progress.interpolate({
+        inputRange: [0, 1],
+        outputRange: [rippleOpacity, 0],
+      }),
+    };
+
+    return (
+      <Animated.View style={[styles.ripple, rippleStyle]} key={unique} />
+    );
+  }
+
   render() {
-    let { children, rippleColor, rippleOpacity, rippleContainerBorderRadius, ...props } = this.props;
     let { ripples } = this.state;
+    let { onPress, onPressIn, onPressOut, onLongPress, onLayout } = this;
+    let {
+      delayLongPress,
+      delayPressIn,
+      delayPressOut,
+      disabled,
+      hitSlop,
+      pressRetentionOffset,
+      children,
+      rippleContainerBorderRadius,
+      onLayout: __ignored__,
+      ...props
+    } = this.props;
+
+    let touchableProps = {
+      delayLongPress,
+      delayPressIn,
+      delayPressOut,
+      disabled,
+      hitSlop,
+      pressRetentionOffset,
+      onPress,
+      onPressIn,
+      onPressOut,
+      onLongPress: props.onLongPress? onLongPress : undefined,
+      onLayout,
+    };
 
     let containerStyle = {
       borderRadius: rippleContainerBorderRadius,
     };
 
-    ripples = ripples
-      .map(({ unique, progress, locationX, locationY, R }) => {
-        let rippleStyle = {
-          top: locationY - radius,
-          left: locationX - radius,
-          backgroundColor: rippleColor,
-
-          transform: [{
-            scale: progress.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0.5 / radius, R / radius],
-            }),
-          }],
-
-          opacity: progress.interpolate({
-            inputRange: [0, 1],
-            outputRange: [rippleOpacity, 0],
-          }),
-        };
-
-        return (
-          <Animated.View style={[ styles.ripple, rippleStyle ]} key={unique} pointerEvents='none' />
-        );
-      });
-
     return (
-      <Animated.View {...props} {...this.panResponder.panHandlers} onLayout={this.onLayout}>
-        {children}
+      <TouchableWithoutFeedback {...touchableProps}>
+        <Animated.View {...props} pointerEvents='box-only'>
+          {children}
 
-        <View style={[ styles.container, containerStyle ]}>
-          {ripples}
-        </View>
-      </Animated.View>
+          <View style={[styles.container, containerStyle]}>
+            {ripples.map(this.renderRipple)}
+          </View>
+        </Animated.View>
+      </TouchableWithoutFeedback>
     );
   }
 }
