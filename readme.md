@@ -3,6 +3,8 @@
 [license-badge]: https://img.shields.io/npm/l/react-native-material-ripple.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-ripple/master/license.txt
 [example-url]: https://cloud.githubusercontent.com/assets/2055622/23309410/a363975a-fabf-11e6-8cd8-b9c5cca76b63.gif
+[touchable]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html
+[touchable-props]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html#props
 
 # react-native-material-ripple
 
@@ -12,6 +14,14 @@
 Base component for touchable elements
 
 ![example][example-url]
+
+## Features
+
+* Easy to use
+* Configurable
+* Can be used as drop-in replacement for [TouchableWithoutFeedback][touchable]
+* Consistent look and feel on iOS and Android
+* Pure javascript implementation
 
 ## Installation
 
@@ -51,6 +61,9 @@ disabled                    | Ripple should ignore touches           |  Boolean 
 onPressIn                   | Touch moved in or started callback     | Function | -
 onPressOut                  | Touch moved out or terminated callback | Function | -
 onPress                     | Touch up inside bounds callback        | Function | -
+onLongPress                 | Touch delayed after onPressIn callback | Function | -
+
+Other [TouchableWithoutFeedback][touchable-props] properties will also work
 
 ## Example
 
