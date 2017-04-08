@@ -126,7 +126,7 @@ export default class Ripple extends PureComponent {
   }
 
   startRipple(event) {
-    let { rippleDuration, rippleOpacity, rippleCentered, rippleSize } = this.props;
+    let { rippleDuration, rippleCentered, rippleSize } = this.props;
     let { width, height } = this.state;
 
     let w2 = 0.5 * width;
@@ -144,26 +144,17 @@ export default class Ripple extends PureComponent {
       Math.sqrt(Math.pow(w2 + offsetX, 2) + Math.pow(h2 + offsetY, 2));
 
     let ripple = {
-      scale: new Animated.Value(0.5 / radius),
-      opacity: new Animated.Value(rippleOpacity),
       unique: this.unique++,
-      locationX, locationY,
+      progress: new Animated.Value(0),
+      locationX, locationY, R,
     };
 
     Animated
-      .parallel([
-        Animated.timing(ripple.scale, {
-          toValue: R / radius,
-          duration: rippleDuration,
-          easing: Easing.out(Easing.ease),
-        }),
-
-        Animated.timing(ripple.opacity, {
-          toValue: 0,
-          duration: rippleDuration,
-          easing: Easing.out(Easing.ease),
-        }),
-      ])
+      .timing(ripple.progress, {
+        toValue: 1,
+        duration: rippleDuration,
+        easing: Easing.out(Easing.ease),
+      })
       .start(() => {
         if (this.mounted) {
           this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
@@ -174,7 +165,7 @@ export default class Ripple extends PureComponent {
   }
 
   render() {
-    let { children, rippleColor, rippleContainerBorderRadius, ...props } = this.props;
+    let { children, rippleColor, rippleOpacity, rippleContainerBorderRadius, ...props } = this.props;
     let { ripples } = this.state;
 
     let containerStyle = {
@@ -182,14 +173,23 @@ export default class Ripple extends PureComponent {
     };
 
     ripples = ripples
-      .map(({ scale, opacity, locationX, locationY, unique }) => {
+      .map(({ unique, progress, locationX, locationY, R }) => {
         let rippleStyle = {
           top: locationY - radius,
           left: locationX - radius,
           backgroundColor: rippleColor,
 
-          transform: [{ scale }],
-          opacity,
+          transform: [{
+            scale: progress.interpolate({
+              inputRange: [0, 1],
+              outputRange: [0.5 / radius, R / radius],
+            }),
+          }],
+
+          opacity: progress.interpolate({
+            inputRange: [0, 1],
+            outputRange: [rippleOpacity, 0],
+          }),
         };
 
         return (
