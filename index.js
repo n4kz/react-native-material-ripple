@@ -32,6 +32,7 @@ export default class Ripple extends PureComponent {
 
     this.unique = 0;
     this.focused = false;
+    this.mounted = false;
 
     this.state = {
       width: 0,
@@ -83,6 +84,14 @@ export default class Ripple extends PureComponent {
         this.setFocused(false);
       },
     });
+  }
+
+  componentDidMount() {
+    this.mounted = true;
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   setFocused(focused) {
@@ -156,7 +165,9 @@ export default class Ripple extends PureComponent {
         }),
       ])
       .start(() => {
-        this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
+        if (this.mounted) {
+          this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
+        }
       });
 
     this.setState(({ ripples }) => ({ ripples: ripples.concat(ripple) }));
