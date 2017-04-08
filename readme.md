@@ -2,6 +2,7 @@
 [npm-url]: https://npmjs.com/package/react-native-material-ripple
 [license-badge]: https://img.shields.io/npm/l/react-native-material-ripple.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-ripple/master/license.txt
+[example-url]: https://cloud.githubusercontent.com/assets/2055622/23309410/a363975a-fabf-11e6-8cd8-b9c5cca76b63.gif
 
 # react-native-material-ripple
 
@@ -10,7 +11,7 @@
 
 Base component for touchable elements
 
-![example](https://cloud.githubusercontent.com/assets/2055622/23309410/a363975a-fabf-11e6-8cd8-b9c5cca76b63.gif)
+![example][example-url]
 
 ## Installation
 
@@ -28,7 +29,7 @@ import Ripple from 'react-native-material-ripple';
 class Example extends Component {
   render() {
     return (
-      <Ripple onPress={ () => null }>
+      <Ripple>
         <Text>touch me</Text>
       </Ripple>
     );
