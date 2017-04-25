@@ -1,6 +1,10 @@
 {
   'parser': 'babel-eslint',
 
+  'globals': {
+    'requestAnimationFrame': true,
+  },
+
   'plugins': [
     'react',
   ],
