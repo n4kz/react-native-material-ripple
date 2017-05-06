@@ -12,6 +12,7 @@ export default class Ripple extends PureComponent {
     rippleSize: 0,
     rippleContainerBorderRadius: 0,
     rippleCentered: false,
+    rippleSequential: false,
     disabled: false,
   };
 
@@ -25,6 +26,7 @@ export default class Ripple extends PureComponent {
     rippleSize: PropTypes.number,
     rippleContainerBorderRadius: PropTypes.number,
     rippleCentered: PropTypes.bool,
+    rippleSequential: PropTypes.bool,
     disabled: PropTypes.bool,
   };
 
@@ -68,13 +70,16 @@ export default class Ripple extends PureComponent {
   }
 
   onPress(event) {
-    let { onPress } = this.props;
+    let { ripples } = this.state;
+    let { onPress, rippleSequential } = this.props;
 
-    if ('function' === typeof onPress) {
-      requestAnimationFrame(() => onPress(event));
+    if (!rippleSequential || !ripples.length) {
+      if ('function' === typeof onPress) {
+        requestAnimationFrame(() => onPress(event));
+      }
+
+      this.startRipple(event);
     }
-
-    this.startRipple(event);
   }
 
   onLongPress(event) {
