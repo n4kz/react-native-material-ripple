@@ -1,4 +1,5 @@
-import React, { PropTypes, PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import React, { PureComponent } from 'react';
 import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
 import { styles, radius } from './styles.js';
 
