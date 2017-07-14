@@ -189,6 +189,8 @@ export default class Ripple extends PureComponent {
       pressRetentionOffset,
       children,
       rippleContainerBorderRadius,
+      testID,
+      nativeID,
       onLayout: __ignored__,
       ...props
     } = this.props;
@@ -202,6 +204,8 @@ export default class Ripple extends PureComponent {
       pressRetentionOffset,
       onPress,
       onPressIn,
+      testID,
+      nativeID,
       onPressOut,
       onLongPress: props.onLongPress? onLongPress : undefined,
       onLayout,
@@ -215,7 +219,6 @@ export default class Ripple extends PureComponent {
       <TouchableWithoutFeedback {...touchableProps}>
         <Animated.View {...props} pointerEvents='box-only'>
           {children}
-
           <View style={[styles.container, containerStyle]}>
             {ripples.map(this.renderRipple)}
           </View>
