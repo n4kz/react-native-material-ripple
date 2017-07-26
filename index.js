@@ -191,6 +191,8 @@ export default class Ripple extends PureComponent {
       rippleContainerBorderRadius,
       testID,
       nativeID,
+      accessible,
+      accessibilityLabel,
       onLayout: __ignored__,
       ...props
     } = this.props;
@@ -206,6 +208,8 @@ export default class Ripple extends PureComponent {
       onPressIn,
       testID,
       nativeID,
+      accessible,
+      accessibilityLabel,
       onPressOut,
       onLongPress: props.onLongPress? onLongPress : undefined,
       onLayout,
