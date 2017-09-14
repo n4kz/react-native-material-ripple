@@ -8,10 +8,10 @@
   },
   "dependencies": {
     "react": "16.0.0-alpha.12",
-    "react-native": "0.46.3",
+    "react-native": "0.48.3",
     "react-native-material-ripple": "file:../"
   },
   "devDependencies": {
-    "babel-preset-react-native": "2.1.0"
+    "babel-preset-react-native": "3.0.2"
   }
 }
