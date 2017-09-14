@@ -14,6 +14,7 @@ export default class Ripple extends PureComponent {
     rippleContainerBorderRadius: 0,
     rippleCentered: false,
     rippleSequential: false,
+    rippleFades: true,
     disabled: false,
   };
 
@@ -28,6 +29,7 @@ export default class Ripple extends PureComponent {
     rippleContainerBorderRadius: PropTypes.number,
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
+    rippleFades: PropTypes.bool,
     disabled: PropTypes.bool,
   };
 
@@ -152,7 +154,7 @@ export default class Ripple extends PureComponent {
   }
 
   renderRipple({ unique, progress, locationX, locationY, R }) {
-    let { rippleColor, rippleOpacity } = this.props;
+    let { rippleColor, rippleOpacity, rippleFades } = this.props;
 
     let rippleStyle = {
       top: locationY - radius,
@@ -166,10 +168,12 @@ export default class Ripple extends PureComponent {
         }),
       }],
 
-      opacity: progress.interpolate({
-        inputRange: [0, 1],
-        outputRange: [rippleOpacity, 0],
-      }),
+      opacity: rippleFades?
+        progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [rippleOpacity, 0],
+        }):
+        rippleOpacity,
     };
 
     return (
