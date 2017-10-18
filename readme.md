@@ -18,9 +18,10 @@ Base component for touchable elements
 
 * Easy to use
 * Configurable
-* Consistent look and feel on iOS and Android
+* Consistent look and feel on iOS, Android, and web
 * Can be used as drop-in replacement for [TouchableWithoutFeedback][touchable]
 * Pure javascript implementation
+* Works with [react-native-web](https://github.com/necolas/react-native-web)
 
 ## Installation
 
