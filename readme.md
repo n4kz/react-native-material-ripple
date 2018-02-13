@@ -63,6 +63,7 @@ class Example extends Component {
  onPressOut                  | Touch moved out or terminated callback | Function | -
  onPress                     | Touch up inside bounds callback        | Function | -
  onLongPress                 | Touch delayed after onPressIn callback | Function | -
+ onRippleAnimation           | Animation start callback               | Function | -
 
 Other [TouchableWithoutFeedback][touchable] properties will also work
 
@@ -79,4 +80,4 @@ react-native run-ios # or run-android
 
 BSD License
 
-Copyright 2017 Alexander Nazarov. All rights reserved.
+Copyright 2017-2018 Alexander Nazarov. All rights reserved.
