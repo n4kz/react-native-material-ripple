@@ -16,6 +16,8 @@ export default class Ripple extends PureComponent {
     rippleSequential: false,
     rippleFades: true,
     disabled: false,
+
+    onRippleAnimation: (animation, callback) => animation.start(callback),
   };
 
   static propTypes = {
@@ -31,6 +33,8 @@ export default class Ripple extends PureComponent {
     rippleSequential: PropTypes.bool,
     rippleFades: PropTypes.bool,
     disabled: PropTypes.bool,
+
+    onRippleAnimation: PropTypes.func,
   };
 
   constructor(props) {
@@ -41,6 +45,8 @@ export default class Ripple extends PureComponent {
     this.onPressIn = this.onPressIn.bind(this);
     this.onPressOut = this.onPressOut.bind(this);
     this.onLongPress = this.onLongPress.bind(this);
+    this.onAnimationEnd = this.onAnimationEnd.bind(this);
+
     this.renderRipple = this.renderRipple.bind(this);
 
     this.unique = 0;
@@ -111,9 +117,20 @@ export default class Ripple extends PureComponent {
     }
   }
 
+  onAnimationEnd() {
+    if (this.mounted) {
+      this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
+    }
+  }
+
   startRipple(event) {
-    let { rippleDuration, rippleCentered, rippleSize } = this.props;
     let { width, height } = this.state;
+    let {
+      rippleDuration,
+      rippleCentered,
+      rippleSize,
+      onRippleAnimation,
+    } = this.props;
 
     let w2 = 0.5 * width;
     let h2 = 0.5 * height;
@@ -137,18 +154,15 @@ export default class Ripple extends PureComponent {
       R,
     };
 
-    Animated
+    let animation = Animated
       .timing(ripple.progress, {
         toValue: 1,
         easing: Easing.out(Easing.ease),
         duration: rippleDuration,
         useNativeDriver: true,
-      })
-      .start(() => {
-        if (this.mounted) {
-          this.setState(({ ripples }) => ({ ripples: ripples.slice(1) }));
-        }
       });
+
+    onRippleAnimation(animation, this.onAnimationEnd);
 
     this.setState(({ ripples }) => ({ ripples: ripples.concat(ripple) }));
   }
