@@ -2,6 +2,8 @@
 [npm-url]: https://npmjs.com/package/react-native-material-ripple
 [license-badge]: https://img.shields.io/npm/l/react-native-material-ripple.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-material-ripple/master/license.txt
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/n4kz/react-native-material-ripple.svg
+[codeclimate-url]: https://codeclimate.com/github/n4kz/react-native-material-ripple
 [example-url]: https://cloud.githubusercontent.com/assets/2055622/24832328/459afaf0-1cb6-11e7-975d-accedb67a716.gif
 [touchable]: https://facebook.github.io/react-native/docs/touchablewithoutfeedback.html
 
@@ -9,6 +11,7 @@
 
 [![npm][npm-badge]][npm-url]
 [![license][license-badge]][license-url]
+[![codeclimate][codeclimate-badge]][codeclimate-url]
 
 Base component for touchable elements
 
