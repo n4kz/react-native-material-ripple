@@ -212,6 +212,8 @@ export default class Ripple extends PureComponent {
       accessible,
       accessibilityLabel,
       onLayout: __ignored__,
+
+      onPress,
       
       rippleColor,
       rippleOpacity,
