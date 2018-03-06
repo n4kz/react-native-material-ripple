@@ -225,6 +225,8 @@ export default class Ripple extends PureComponent {
       ...props
     } = this.props;
 
+    delete props.onPress;
+
     let touchableProps = {
       delayLongPress,
       delayPressIn,
