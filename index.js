@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, Animated, Easing, TouchableWithoutFeedback, I18nManager } from 'react-native';
 import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
@@ -172,7 +172,7 @@ export default class Ripple extends PureComponent {
 
     let rippleStyle = {
       top: locationY - radius,
-      left: locationX - radius,
+      [I18nManager.isRTL ? 'right': 'left']: locationX - radius,
       backgroundColor: rippleColor,
 
       transform: [{
