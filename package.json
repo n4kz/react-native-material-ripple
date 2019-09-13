@@ -8,6 +8,7 @@
   "keywords": ["react", "react-component", "react-native", "ios", "android", "ripple", "material"],
 
   "main": "index.js",
+  "files": ["index.js", "styles.js", "license.txt", "readme.md"],
 
   "repository": {
     "type": "git",
