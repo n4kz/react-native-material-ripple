@@ -197,7 +197,6 @@ export default class Ripple extends PureComponent {
 
   render() {
     let { ripples } = this.state;
-    let { onPress, onPressIn, onPressOut, onLongPress, onLayout } = this;
     let {
       delayLongPress,
       delayPressIn,
@@ -211,7 +210,11 @@ export default class Ripple extends PureComponent {
       nativeID,
       accessible,
       accessibilityLabel,
-      onLayout: __ignored__,
+
+      onPress,
+      onLongPress,
+      onLayout,
+      onRippleAnimation,
       
       rippleColor,
       rippleOpacity,
@@ -221,11 +224,8 @@ export default class Ripple extends PureComponent {
       rippleSequential,
       rippleFades,
 
-      onRippleAnimation,
       ...props
     } = this.props;
-
-    delete props.onPress;
 
     let touchableProps = {
       delayLongPress,
@@ -234,14 +234,16 @@ export default class Ripple extends PureComponent {
       disabled,
       hitSlop,
       pressRetentionOffset,
-      onPress,
-      onPressIn,
       testID,
       accessible,
       accessibilityLabel,
-      onPressOut,
-      onLongPress: props.onLongPress? onLongPress : undefined,
-      onLayout,
+      onLayout: this.onLayout,
+      onPress: this.onPress,
+      onPressIn: this.onPressIn,
+      onPressOut: this.onPressOut,
+      onLongPress: onLongPress?
+        this.onLongPress:
+        undefined,
     };
 
     let containerStyle = {
