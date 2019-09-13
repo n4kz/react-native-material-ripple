@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, ScrollView, SafeAreaView, Platform } from 'react-native';
+import { AppRegistry, Text, ScrollView, SafeAreaView } from 'react-native';
 import Ripple from 'react-native-material-ripple';
 
 let styles = {
