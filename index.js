@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, Easing, TouchableWithoutFeedback } from 'react-native';
+import { View, Animated, Easing, Platform, TouchableWithoutFeedback } from 'react-native';
 import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
@@ -244,6 +244,8 @@ export default class Ripple extends PureComponent {
       onLongPress: onLongPress?
         this.onLongPress:
         undefined,
+
+      ...('web' !== Platform.OS? { nativeID } : null),
     };
 
     let containerStyle = {
