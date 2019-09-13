@@ -212,8 +212,20 @@ export default class Ripple extends PureComponent {
       accessible,
       accessibilityLabel,
       onLayout: __ignored__,
+      
+      rippleColor,
+      rippleOpacity,
+      rippleDuration,
+      rippleSize,
+      rippleCentered,
+      rippleSequential,
+      rippleFades,
+
+      onRippleAnimation,
       ...props
     } = this.props;
+
+    delete props.onPress;
 
     let touchableProps = {
       delayLongPress,
@@ -225,7 +237,6 @@ export default class Ripple extends PureComponent {
       onPress,
       onPressIn,
       testID,
-      nativeID,
       accessible,
       accessibilityLabel,
       onPressOut,
