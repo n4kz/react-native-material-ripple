@@ -24,6 +24,7 @@ Base component for touchable elements
 * Consistent look and feel on iOS and Android
 * Can be used as drop-in replacement for [TouchableWithoutFeedback][touchable]
 * Pure javascript implementation
+* RTL Support
 
 ## Installation
 
