@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, Easing, TouchableWithoutFeedback, I18nManager } from 'react-native';
+import { View, Animated, Easing, Platform, TouchableWithoutFeedback, I18nManager } from 'react-native';
 import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
@@ -172,7 +172,7 @@ export default class Ripple extends PureComponent {
 
     let rippleStyle = {
       top: locationY - radius,
-      [I18nManager.isRTL ? 'right': 'left']: locationX - radius,
+      [I18nManager.isRTL? 'right' : 'left']: locationX - radius,
       backgroundColor: rippleColor,
 
       transform: [{
@@ -197,7 +197,6 @@ export default class Ripple extends PureComponent {
 
   render() {
     let { ripples } = this.state;
-    let { onPress, onPressIn, onPressOut, onLongPress, onLayout } = this;
     let {
       delayLongPress,
       delayPressIn,
@@ -210,8 +209,22 @@ export default class Ripple extends PureComponent {
       testID,
       nativeID,
       accessible,
+      accessibilityHint,
       accessibilityLabel,
-      onLayout: __ignored__,
+
+      onPress,
+      onLongPress,
+      onLayout,
+      onRippleAnimation,
+      
+      rippleColor,
+      rippleOpacity,
+      rippleDuration,
+      rippleSize,
+      rippleCentered,
+      rippleSequential,
+      rippleFades,
+
       ...props
     } = this.props;
 
@@ -222,15 +235,19 @@ export default class Ripple extends PureComponent {
       disabled,
       hitSlop,
       pressRetentionOffset,
-      onPress,
-      onPressIn,
       testID,
-      nativeID,
       accessible,
+      accessibilityHint,
       accessibilityLabel,
-      onPressOut,
-      onLongPress: props.onLongPress? onLongPress : undefined,
-      onLayout,
+      onLayout: this.onLayout,
+      onPress: this.onPress,
+      onPressIn: this.onPressIn,
+      onPressOut: this.onPressOut,
+      onLongPress: onLongPress?
+        this.onLongPress:
+        undefined,
+
+      ...('web' !== Platform.OS? { nativeID } : null),
     };
 
     let containerStyle = {
