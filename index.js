@@ -15,7 +15,7 @@ export default class Ripple extends PureComponent {
     rippleCentered: false,
     rippleSequential: false,
     rippleFades: true,
-    rippleOnTouch: true,
+    rippleOnPressIn: true,
     disabled: false,
 
     onRippleAnimation: (animation, callback) => animation.start(callback),
@@ -33,7 +33,7 @@ export default class Ripple extends PureComponent {
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
     rippleFades: PropTypes.bool,
-    rippleOnTouch: PropTypes.bool,
+    rippleOnPressIn: PropTypes.bool,
     disabled: PropTypes.bool,
 
     onRippleAnimation: PropTypes.func,
@@ -82,14 +82,14 @@ export default class Ripple extends PureComponent {
 
   onPress(event) {
     let { ripples } = this.state;
-    let { onPress, rippleSequential, rippleOnTouch } = this.props;
+    let { onPress, rippleSequential, rippleOnPressIn } = this.props;
 
     if (!rippleSequential || !ripples.length) {
       if ('function' === typeof onPress) {
         requestAnimationFrame(() => onPress(event));
       }
 
-      if (!rippleOnTouch)
+      if (!rippleOnPressIn)
         this.startRipple(event);
     }
   }
@@ -105,13 +105,13 @@ export default class Ripple extends PureComponent {
   }
 
   onPressIn(event) {
-    let { onPressIn, rippleOnTouch } = this.props;
+    let { onPressIn, rippleOnPressIn } = this.props;
 
     if ('function' === typeof onPressIn) {
       onPressIn(event);
     }
 
-    if (rippleOnTouch)
+    if (rippleOnPressIn)
       this.startRipple(event);
   }
 
@@ -230,7 +230,7 @@ export default class Ripple extends PureComponent {
       rippleCentered,
       rippleSequential,
       rippleFades,
-      rippleOnTouch,
+      rippleOnPressIn,
 
       ...props
     } = this.props;
