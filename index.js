@@ -1,6 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, Easing, Platform, TouchableWithoutFeedback, I18nManager } from 'react-native';
+import {
+  View,
+  Animated,
+  Easing,
+  Platform,
+  TouchableWithoutFeedback,
+  I18nManager,
+} from 'react-native';
+
 import { styles, radius } from './styles.js';
 
 export default class Ripple extends PureComponent {
@@ -216,7 +224,7 @@ export default class Ripple extends PureComponent {
       onLongPress,
       onLayout,
       onRippleAnimation,
-      
+
       rippleColor,
       rippleOpacity,
       rippleDuration,

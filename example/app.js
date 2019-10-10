@@ -106,12 +106,26 @@ export default function init() {
               <Text style={styles.text}>rippleColor=#FFFFFF{'\n'}rippleCentered=true</Text>
             </Ripple>
 
-            <Ripple style={[styles.container, styles.f]} rippleColor='#D500F9' rippleOpacity={0.87} rippleDuration={1200}>
-              <Text style={styles.text}>rippleColor=#D500F9{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=1200</Text>
+            <Ripple
+              style={[styles.container, styles.f]}
+              rippleColor='#D500F9'
+              rippleOpacity={0.87}
+              rippleDuration={1200}
+            >
+              <Text style={styles.text}>
+                rippleColor=#D500F9{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=1200
+              </Text>
             </Ripple>
 
-            <Ripple style={[styles.container, styles.g]} rippleColor='#76FF03' rippleOpacity={0.87} rippleDuration={2400}>
-              <Text style={styles.text}>rippleColor=#76FF03{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=2400</Text>
+            <Ripple
+              style={[styles.container, styles.g]}
+              rippleColor='#76FF03'
+              rippleOpacity={0.87}
+              rippleDuration={2400}
+            >
+              <Text style={styles.text}>
+                rippleColor=#76FF03{'\n'}rippleOpacity=0.87{'\n'}rippleDuration=2400
+              </Text>
             </Ripple>
 
             <Ripple disabled style={[styles.container, styles.z]}>
