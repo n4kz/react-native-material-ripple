@@ -1,10 +1,10 @@
-declare module "react-native-material-ripple" {
-  import React from "react";
+declare module 'react-native-material-ripple' {
+  import React from 'react';
   import {
     Animated,
     ViewProps,
-    TouchableWithoutFeedbackProps
-  } from "react-native";
+    TouchableWithoutFeedbackProps,
+  } from 'react-native';
 
   export type RippleProps = {
     rippleColor?: string;
@@ -19,7 +19,7 @@ declare module "react-native-material-ripple" {
     disabled?: boolean;
     onRippleAnimation?: (
       animation: Animated.CompositeAnimation,
-      callback: () => void
+      callback: () => void,
     ) => void;
   };
 
