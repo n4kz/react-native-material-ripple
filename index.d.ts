@@ -4,6 +4,7 @@ declare module 'react-native-material-ripple' {
     Animated,
     ViewProps,
     TouchableWithoutFeedbackProps,
+    ViewStyle,
   } from 'react-native';
 
   export type RippleProps = {
