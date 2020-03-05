@@ -1,14 +1,12 @@
 declare module "react-native-material-ripple" {
-  import { PureComponent } from "react";
+  import React from "react";
   import {
-    TouchableWithoutFeedbackProps,
     Animated,
-    ViewProps
+    ViewProps,
+    TouchableWithoutFeedbackProps
   } from "react-native";
 
-  export interface RippleProps
-    extends TouchableWithoutFeedbackProps,
-      ViewProps {
+  export type RippleProps = {
     rippleColor?: string;
     rippleOpacity?: number;
     rippleDuration?: number;
@@ -19,12 +17,15 @@ declare module "react-native-material-ripple" {
     rippleFades?: boolean;
     rippleOverflow?: boolean;
     disabled?: boolean;
-
     onRippleAnimation?: (
-      animation: Animated.TimingAnimationConfig,
+      animation: Animated.CompositeAnimation,
       callback: () => void
     ) => void;
-  }
+  };
 
-  export default class Ripple extends PureComponent<RippleProps> {}
+  const Ripple: React.ComponentType<RippleProps &
+    Animated.AnimatedProps<ViewProps> &
+    TouchableWithoutFeedbackProps>;
+
+  export default Ripple;
 }
