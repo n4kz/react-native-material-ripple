@@ -24,8 +24,8 @@ declare module 'react-native-material-ripple' {
   };
 
   const Ripple: React.ComponentType<RippleProps &
-    Animated.AnimatedProps<ViewProps> &
-    TouchableWithoutFeedbackProps>;
+  (Animated.AnimatedProps<ViewProps> | ViewStyle) &
+  TouchableWithoutFeedbackProps>;
 
   export default Ripple;
 }
