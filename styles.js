@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
 
     backgroundColor: 'transparent',
-    overflow: 'hidden',
   },
 
   ripple: {

@@ -62,6 +62,7 @@ class Example extends Component {
  rippleCentered              | Ripple always starts from center       |  Boolean | false
  rippleSequential            | Ripple should start in sequence        |  Boolean | false
  rippleFades                 | Ripple fades out                       |  Boolean | true
+ rippleBorder                | Ripple respects border of parent       |  Boolean | true
  disabled                    | Ripple should ignore touches           |  Boolean | false
  onPressIn                   | Touch moved in or started callback     | Function | -
  onPressOut                  | Touch moved out or terminated callback | Function | -
