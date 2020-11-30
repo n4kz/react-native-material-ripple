@@ -23,6 +23,7 @@ export default class Ripple extends PureComponent {
     rippleCentered: false,
     rippleSequential: false,
     rippleFades: true,
+    rippleOverflow: false,
     disabled: false,
 
     onRippleAnimation: (animation, callback) => animation.start(callback),
@@ -40,6 +41,7 @@ export default class Ripple extends PureComponent {
     rippleCentered: PropTypes.bool,
     rippleSequential: PropTypes.bool,
     rippleFades: PropTypes.bool,
+    rippleOverflow: PropTypes.bool,
     disabled: PropTypes.bool,
 
     onRippleAnimation: PropTypes.func,
@@ -232,6 +234,7 @@ export default class Ripple extends PureComponent {
       rippleCentered,
       rippleSequential,
       rippleFades,
+      rippleOverflow,
 
       ...props
     } = this.props;
@@ -260,6 +263,7 @@ export default class Ripple extends PureComponent {
 
     let containerStyle = {
       borderRadius: rippleContainerBorderRadius,
+      overflow: rippleOverflow ? 'visible' : 'hidden'
     };
 
     return (
