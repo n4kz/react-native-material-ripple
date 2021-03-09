@@ -143,9 +143,15 @@ export default class Ripple extends PureComponent {
     let w2 = 0.5 * width;
     let h2 = 0.5 * height;
 
-    let { locationX, locationY } = rippleCentered?
-      { locationX: w2, locationY: h2 }:
-      event.nativeEvent;
+    let locationX = w2;
+    let locationY = h2;
+
+    if (!rippleCentered) {
+      const { nativeEvent } = event;
+
+      locationX = nativeEvent.locationX ?? nativeEvent.layerX
+      locationY = nativeEvent.locationY ?? nativeEvent.layerY
+    }
 
     let offsetX = Math.abs(w2 - locationX);
     let offsetY = Math.abs(h2 - locationY);
