@@ -180,7 +180,7 @@ export default class Ripple extends PureComponent {
 
     let rippleStyle = {
       top: locationY - radius,
-      [I18nManager.isRTL? 'right' : 'left']: locationX - radius,
+      [Platform.OS === "android" && I18nManager.isRTL? 'right' : 'left']: locationX - radius,
       backgroundColor: rippleColor,
 
       transform: [{
